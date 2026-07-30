@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colchón New style 6 | Rosen</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #fff;
+        max-width: 1920px;
+        margin: 0 auto;
+        color: #222;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .full-width-image {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .full-width-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Header */
+    .header-container {
+        position: relative;
+    }
+
+    .header-hover-image {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .25s;
+        z-index: 9999;
+    }
+
+    .header-hover-image img {
+        display: block;
+        width: 100%;
+    }
+
+    .header-hover-image.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .content {
+        max-width: 1200px;
+        margin: 0 auto 80px;
+        padding: 0 40px;
+    }
+
+    .breadcrumb {
+        display: block;
+        font-size: 13px;
+        color: #666;
+        padding: 24px 0 0;
+    }
+
+    .breadcrumb a {
+        text-decoration: none;
+        color: #666;
+    }
+
+    .breadcrumb .current {
+        color: #222;
+        font-weight: 600;
+    }
+
+    /* PDP */
+    .pdp {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 60px;
+        margin-top: 30px;
+    }
+
+    .pdp-gallery {
+        position: relative;
+    }
+
+    .pdp-gallery .product-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background: #f2f2f2;
+        border: 1px solid #ddd;
+        overflow: hidden;
+    }
+
+    .pdp-gallery .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .discount-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 14px;
+        background: #c12637;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+        padding: 8px 14px;
+        z-index: 2;
+    }
+
+    .pdp-info .linea-reco {
+        font-size: 13px;
+        font-weight: 400;
+        color: #666;
+    }
+
+    .pdp-info h1 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #222;
+        padding: 4px 0 10px;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .stars {
+        position: relative;
+        display: inline-block;
+        font-size: 16px;
+        line-height: 1;
+        color: #ddd;
+        letter-spacing: 2px;
+    }
+
+    .stars::before {
+        content: "★★★★★";
+    }
+
+    .stars::after {
+        content: "★★★★★";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(var(--rating) / 5.1 * 100%);
+        overflow: hidden;
+        white-space: nowrap;
+        color: #f5b400;
+        opacity: .8;
+    }
+
+    .rating-count {
+        font-size: 13px;
+        color: #666;
+    }
+
+    .pdp-price {
+        margin: 6px 0 20px;
+        font-size: 30px;
+        font-weight: 700;
+        color: #111;
+    }
+
+    .pdp-price .price-old {
+        margin-left: 10px;
+        font-size: 17px;
+        font-weight: 400;
+        color: #999;
+        text-decoration: line-through;
+    }
+
+    .tamano-colchon,
+    .base-info {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+        margin-bottom: 6px;
+        align-items: baseline;
+        flex-wrap: wrap;
+    }
+
+    .tamano-colchon .description {
+        min-width: 70px;
+        margin-bottom: 0;
+        font-size: 13px;
+        color: #555;
+    }
+
+    .firme {
+        border: 1px solid #bbb;
+        border-radius: 50px;
+        max-width: fit-content;
+        text-align: center;
+        font-size: 13px;
+        margin-bottom: 10px;
+        padding: 6px 14px;
+        cursor: pointer;
+        user-select: none;
+        transition: background .15s, color .15s, border-color .15s;
+    }
+
+    .firme:hover {
+        border-color: #222;
+    }
+
+    .firme.selected {
+        background: #222;
+        border-color: #222;
+        color: #fff;
+    }
+
+    .almohada-check-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 10px 0 20px;
+        font-size: 13px;
+        color: #333;
+        cursor: pointer;
+    }
+
+    .valores {
+        margin: 20px 0;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    .valores-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .valores-label {
+        width: 90px;
+        flex-shrink: 0;
+    }
+
+    .valores-bar {
+        display: flex;
+        gap: 3px;
+        flex: 1;
+    }
+
+    .valores-segment {
+        flex: 1;
+        height: 7px;
+        border-radius: 1px;
+        background: #dde1e8;
+    }
+
+    .valores-segment.filled {
+        background: #0d1b3d;
+    }
+
+    .product-cta {
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 20px;
+        padding: 16px 0;
+        background: #222;
+        color: #fff;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .product-cta:hover {
+        background: #444;
+    }
+
+    .pdp-description {
+        margin-top: 60px;
+        max-width: 720px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .pdp-description h2 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    @media (max-width: 900px) {
+        .pdp {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Carrito */
+    .cart-drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .4);
+        z-index: 3000;
+    }
+
+    .cart-drawer-overlay.active {
+        display: block;
+    }
+
+    .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 420px;
+        height: 100%;
+        background: #fff;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, .15);
+        z-index: 3001;
+        transform: translateX(100%);
+        transition: transform .25s ease;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .cart-drawer.active {
+        transform: translateX(0);
+    }
+
+    .cart-drawer-close {
+        position: absolute;
+        top: -2px;
+        right: 0;
+        background: none;
+        border: none;
+        color: #222;
+        cursor: pointer;
+        line-height: 1;
+        padding: 4px;
+    }
+
+    .cart-drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 36px 0 20px;
+        border-bottom: 1px solid #222;
+    }
+
+    .cart-drawer-header h3 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 500;
+    }
+
+    .cart-drawer-count {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #333;
+        color: #fff;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .cart-drawer-banner {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #f3f3f3;
+        margin: 0 -20px;
+        padding: 16px 20px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .cart-drawer-banner svg {
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .cart-drawer-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px 0;
+    }
+
+    .cart-item {
+        display: flex;
+        gap: 16px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .cart-item img {
+        width: 120px;
+        height: 100px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .cart-item-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .cart-item-name-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .cart-item-name-row p {
+        margin: 0;
+        font-size: 15px;
+        color: #222;
+    }
+
+    .cart-item-remove {
+        background: none;
+        border: none;
+        color: #222;
+        cursor: pointer;
+        flex-shrink: 0;
+        padding: 2px;
+    }
+
+    .cart-item-price-old {
+        display: block;
+        color: #999;
+        text-decoration: line-through;
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .cart-item-price {
+        display: block;
+        color: #c12637;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .cart-item-qty {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 110px;
+        border: 1px solid #ddd;
+    }
+
+    .cart-item-qty button {
+        width: 32px;
+        height: 32px;
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .cart-drawer-subtotal {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+        font-size: 22px;
+    }
+
+    .cart-drawer-checkout {
+        display: block;
+        width: 100%;
+        background: #333;
+        color: #fff;
+        border: none;
+        padding: 16px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-container">
+    <div class="full-width-image" id="headerImage">
+        <img src="./images/header.png" alt="">
+    </div>
+    <div class="header-hover-image" id="headerMenu">
+        <img src="./images/header-hover.png" alt="">
+    </div>
+</div>
+
+<div class="content">
+
+    <nav class="breadcrumb"><a href="index-guia.html">Inicio</a> › <a href="index-guia.html">Camas y Colchones</a> › <a href="index-lineas.html">Líneas Camas y Colchones</a> › <span class="current">Colchón New style 6</span></nav>
+
+    <div class="pdp">
+        <div class="pdp-gallery">
+            <div class="product-image">
+                <img id="pdpImage" src="https://www.rosen.cl/media/catalog/product/1/4/14017392-1.jpg" alt="Colchón New style 6">
+                <span class="discount-badge" id="pdpDiscount">26%</span>
+            </div>
+        </div>
+
+        <div class="pdp-info">
+            <p class="linea-reco">Línea Premium</p>
+            <h1>Colchón New style 6</h1>
+
+            <div class="rating">
+                <span class="stars" style="--rating: 4.5;"></span>
+                <span class="rating-count">150 reseñas</span>
+            </div>
+
+            <p class="pdp-price" id="pdpPrice">$249.990<span class="price-old" id="pdpPriceOld">$339.990</span></p>
+
+            <div class="tamano-colchon">
+                <p class="description">Tamaño</p>
+                <p class="firme" data-medida="150 x 190cm">150 x 190cm</p>
+                <p class="firme selected" data-medida="150 x 200cm">150 x 200cm</p>
+            </div>
+
+            <label class="almohada-check-row">
+                <input type="checkbox" id="pdpAlmohada">
+                + Almohada Fibra Light
+            </label>
+
+            <div class="valores">
+                <div class="valores-row">
+                    <span class="valores-label">Firmeza</span>
+                    <div class="valores-bar">
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment"></span>
+                    </div>
+                </div>
+                <div class="valores-row">
+                    <span class="valores-label">Adaptación</span>
+                    <div class="valores-bar">
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment filled"></span>
+                        <span class="valores-segment"></span>
+                        <span class="valores-segment"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="product-cta" id="pdpAddToCart">Agregar al carro</button>
+        </div>
+    </div>
+
+    <div class="pdp-description">
+        <h2>Descripción</h2>
+        <p>El Colchón New style 6 de Línea Premium combina resortes pocket advance con espumas zonificadas para un soporte diferenciado por zonas del cuerpo. Firmeza intermedia y buena adaptabilidad, pensado para quienes buscan un descanso más tecnológico sin perder confort.</p>
+    </div>
+
+</div>
+
+<div class="full-width-image">
+    <img src="./images/footer.png" alt="">
+</div>
+
+<div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+    <button class="cart-drawer-close" type="button" aria-label="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </button>
+    <div class="cart-drawer-header">
+        <h3>Mi compra</h3>
+        <span class="cart-drawer-count" id="cartDrawerCount">0</span>
+    </div>
+    <div class="cart-drawer-banner" id="cartDrawerBanner"></div>
+    <div class="cart-drawer-items" id="cartDrawerItems"></div>
+    <div class="cart-drawer-subtotal">
+        <span>Subtotal</span>
+        <span id="cartDrawerSubtotal">$0</span>
+    </div>
+    <button class="cart-drawer-checkout" type="button">Finalizar compra</button>
+</div>
+
+<script>
+// Menú desplegable (igual que Guía/Líneas)
+const header = document.getElementById("headerImage");
+const menu = document.getElementById("headerMenu");
+header.addEventListener("mouseenter", () => menu.classList.add("show"));
+header.addEventListener("mouseleave", () => menu.classList.remove("show"));
+
+// Datos reales del producto (mismos valores que en index-lineas.html)
+const PDP_DATA = {
+    nombre: 'Colchón New style 6',
+    imagen: 'https://www.rosen.cl/media/catalog/product/1/4/14017392-1.jpg',
+    imagenAlmohada: 'https://www.rosen.cl/media/catalog/product/1/4/14012528-1new.jpg?quality=100&bg-color=255,255,255&fit=bounds&height=900&width=900&canvas=900:900',
+    tamanos: {
+        '150 x 190cm': { precio: 239990, precioNormal: 319990 },
+        '150 x 200cm': { precio: 249990, precioNormal: 339990 }
+    },
+    tamanosConAlmohada: {
+        '150 x 190cm': { precio: 239990, precioNormal: 329990 },
+        '150 x 200cm': { precio: 249990, precioNormal: 349990 }
+    }
+};
+
+function fmt(n) { return '$' + n.toLocaleString('es-CL'); }
+
+let medidaActual = '150 x 200cm';
+
+function actualizarPrecio() {
+    const conAlmohada = document.getElementById('pdpAlmohada').checked;
+    const fuente = conAlmohada ? PDP_DATA.tamanosConAlmohada : PDP_DATA.tamanos;
+    const v = fuente[medidaActual];
+    const descuento = Math.round((1 - v.precio / v.precioNormal) * 100);
+    document.getElementById('pdpPrice').innerHTML = fmt(v.precio) + '<span class="price-old" id="pdpPriceOld">' + fmt(v.precioNormal) + '</span>';
+    document.getElementById('pdpDiscount').textContent = descuento + '%';
+}
+
+document.querySelectorAll('.tamano-colchon .firme').forEach(pill => {
+    pill.addEventListener('click', () => {
+        document.querySelectorAll('.tamano-colchon .firme').forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        medidaActual = pill.dataset.medida;
+        actualizarPrecio();
+    });
+});
+
+document.getElementById('pdpAlmohada').addEventListener('change', actualizarPrecio);
+
+// Carrito (mismo patrón que index-lineas.html; carrito propio de esta página)
+(() => {
+    const drawer = document.getElementById('cartDrawer');
+    const overlay = document.getElementById('cartDrawerOverlay');
+    const countEl = document.getElementById('cartDrawerCount');
+    const bannerEl = document.getElementById('cartDrawerBanner');
+    const itemsEl = document.getElementById('cartDrawerItems');
+    const subtotalEl = document.getElementById('cartDrawerSubtotal');
+
+    let cartItems = [];
+
+    const checkIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>';
+    const trashIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
+
+    function openDrawer() {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+
+    function renderCart(lastAdded) {
+        const totalQty = cartItems.reduce((sum, it) => sum + it.qty, 0);
+        countEl.textContent = totalQty;
+
+        bannerEl.innerHTML = lastAdded ? `${checkIcon}<span>Agregaste ${lastAdded}</span>` : '';
+        bannerEl.style.display = lastAdded ? 'flex' : 'none';
+
+        itemsEl.innerHTML = cartItems.map((it, i) => `
+            <div class="cart-item" data-index="${i}">
+                <img src="${it.imagen}" alt="${it.nombre}">
+                <div class="cart-item-info">
+                    <div class="cart-item-name-row">
+                        <p>${it.nombre}</p>
+                        <button type="button" class="cart-item-remove" aria-label="Quitar ${it.nombre}">${trashIcon}</button>
+                    </div>
+                    ${it.precioNormal ? `<span class="cart-item-price-old">${fmt(it.precioNormal)}</span>` : ''}
+                    <span class="cart-item-price">${fmt(it.precio)}</span>
+                    <div class="cart-item-qty">
+                        <button type="button" class="cart-item-qty-dec" aria-label="Restar">−</button>
+                        <span>${it.qty}</span>
+                        <button type="button" class="cart-item-qty-inc" aria-label="Sumar">+</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        const subtotal = cartItems.reduce((sum, it) => sum + it.precio * it.qty, 0);
+        subtotalEl.textContent = fmt(subtotal);
+    }
+
+    function addToCart(detail) {
+        const existing = cartItems.find(it => it.nombre === detail.nombre);
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            cartItems.push(Object.assign({ qty: 1 }, detail));
+        }
+        renderCart(detail.nombre);
+    }
+
+    itemsEl.addEventListener('click', (e) => {
+        const row = e.target.closest('.cart-item');
+        if (!row) return;
+        const index = parseInt(row.dataset.index, 10);
+        if (e.target.closest('.cart-item-remove')) {
+            cartItems.splice(index, 1);
+            renderCart();
+        } else if (e.target.closest('.cart-item-qty-inc')) {
+            cartItems[index].qty += 1;
+            renderCart();
+        } else if (e.target.closest('.cart-item-qty-dec')) {
+            cartItems[index].qty = Math.max(1, cartItems[index].qty - 1);
+            renderCart();
+        }
+    });
+
+    document.getElementById('pdpAddToCart').addEventListener('click', () => {
+        const conAlmohada = document.getElementById('pdpAlmohada').checked;
+        const fuente = conAlmohada ? PDP_DATA.tamanosConAlmohada : PDP_DATA.tamanos;
+        const v = fuente[medidaActual];
+        const nombre = PDP_DATA.nombre + ' — ' + medidaActual + (conAlmohada ? ' + Almohada' : '');
+        addToCart({ nombre, imagen: PDP_DATA.imagen, precio: v.precio, precioNormal: v.precioNormal });
+        openDrawer();
+    });
+
+    overlay.addEventListener('click', closeDrawer);
+    drawer.querySelector('.cart-drawer-close').addEventListener('click', closeDrawer);
+})();
+</script>
+</body>
+</html>

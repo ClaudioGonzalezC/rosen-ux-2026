@@ -3160,7 +3160,7 @@ RosenCompare.wireOutboundLinks();
             </div>
             ${valoresHtml(m)}
             <p class="price" data-precio="${precioInicial}" data-precio-normal="${precioNormalInicial || ''}"${precioConAlmohada ? ` data-precio-almohada="${precioConAlmohada.precio}" data-precio-normal-almohada="${precioConAlmohada.precioNormal}"` : ''}>$${precioInicial.toLocaleString('es-CL')}${precioNormalInicial ? `<span class="price-old">$${precioNormalInicial.toLocaleString('es-CL')}</span>` : ''}</p>
-            <a class="product-cta" href="#">Agregar al carro</a>
+            <a class="product-cta" href="${esNewStyle6Colchon ? 'index-pdp.html' : '#'}">Ver producto</a>
         </div>
     `;
     }).join('');
