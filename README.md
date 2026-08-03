@@ -1,6 +1,6 @@
-# Camas y Colchones — Guía y Líneas (R*s*n)
+# Camas y Colchones — Guía y Líneas (Rosen)
 
-Wireframe interactivo de alta fidelidad para el rediseño de las secciones **Guía** y **Líneas** de Camas y Colchones de r*s*n.cl. No es solo un mockup estático: incluye interacciones reales (quiz, filtros, comparador) y capas de anotaciones superpuestas que documentan el razonamiento detrás de cada decisión de diseño.
+Wireframe interactivo de alta fidelidad para el rediseño de las secciones **Guía** y **Líneas** de Camas y Colchones de [rosen.cl](https://www.rosen.cl). No es solo un mockup estático: incluye interacciones reales (quiz, filtros, comparador) y capas de anotaciones superpuestas que documentan el razonamiento detrás de cada decisión de diseño.
 
 **Análisis de datos y propuesta UX por Claudio González.**
 
@@ -60,7 +60,7 @@ Seis perfiles identificados a partir de datos de búsqueda y navegación medidos
 - **P3 — Validador de categoría**: vuelve del PDP a Guía a validar la categoría.
 - **P4 — Comparador sin estructura** ⚠️: compara líneas manualmente, sin convertir.
 - **P5 — Verificador de viabilidad** ⚠️ bajo volumen: revisa medidas antes de comprar.
-- **P6 — Comprador de otra categoría R*s*n** ⏳ fuera de alcance (fase 2): busca otras verticales del sitio.
+- **P6 — Comprador de otra categoría Rosen** ⏳ fuera de alcance (fase 2): busca otras verticales del sitio.
 
 ## Stack técnico
 
