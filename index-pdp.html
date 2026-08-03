@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colchón New style 6 | Rosen</title>
+<title>Colchón New style 6 | R*s*n</title>
 
 <style>
     * {
@@ -64,7 +64,7 @@
     }
 
     .content {
-        max-width: 1200px;
+        max-width: 1500px;
         margin: 0 auto 80px;
         padding: 0 40px;
     }
@@ -89,13 +89,27 @@
     /* PDP */
     .pdp {
         display: grid;
-        grid-template-columns: 1fr 420px;
+        grid-template-columns: 1.5fr 1fr;
         gap: 60px;
         margin-top: 30px;
     }
 
     .pdp-gallery {
-        position: relative;
+        display: flex;
+        gap: 12px;
+    }
+
+    .pdp-thumbs-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 140px;
+        flex-shrink: 0;
+    }
+
+    .pdp-main-col {
+        flex: 1;
+        min-width: 0;
     }
 
     .pdp-gallery .product-image {
@@ -112,6 +126,41 @@
         height: 100%;
         object-fit: cover;
         display: block;
+    }
+
+    .pdp-thumbs-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .pdp-thumbs-row .pdp-thumb {
+        flex: 1;
+        width: auto;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .pdp-thumb {
+        width: 140px;
+        height: 140px;
+        flex-shrink: 0;
+        border: 1px solid #ddd;
+        background: #f2f2f2;
+        cursor: pointer;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .pdp-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .pdp-thumb.selected {
+        border: 2px solid #222;
     }
 
     .discount-badge {
@@ -300,8 +349,9 @@
     }
 
     .pdp-description {
-        margin-top: 60px;
-        max-width: 720px;
+        margin: 20px 0;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
         font-size: 14px;
         line-height: 1.6;
         color: #333;
@@ -536,9 +586,33 @@
 
     <div class="pdp">
         <div class="pdp-gallery">
-            <div class="product-image">
-                <img id="pdpImage" src="https://www.rosen.cl/media/catalog/product/1/4/14017392-1.jpg" alt="Colchón New style 6">
-                <span class="discount-badge" id="pdpDiscount">26%</span>
+            <div class="pdp-thumbs-vertical">
+                <button type="button" class="pdp-thumb selected" data-imagen="./images/productos/14017392-1.jpg">
+                    <img src="./images/productos/14017392-1.jpg" alt="Colchón New style 6 — vista 1">
+                </button>
+                <button type="button" class="pdp-thumb" data-imagen="./images/productos/14017393-3.jpg">
+                    <img src="./images/productos/14017393-3.jpg" alt="Colchón New style 6 — vista 3">
+                </button>
+                <button type="button" class="pdp-thumb" data-imagen="./images/productos/14017393-4.jpg">
+                    <img src="./images/productos/14017393-4.jpg" alt="Colchón New style 6 — vista 4">
+                </button>
+                <button type="button" class="pdp-thumb" data-imagen="./images/productos/14017393-5.jpg">
+                    <img src="./images/productos/14017393-5.jpg" alt="Colchón New style 6 — vista 5">
+                </button>
+            </div>
+            <div class="pdp-main-col">
+                <div class="product-image">
+                    <img id="pdpImage" src="./images/productos/14017392-1.jpg" alt="Colchón New style 6">
+                    <span class="discount-badge" id="pdpDiscount">26%</span>
+                </div>
+                <div class="pdp-thumbs-row">
+                    <button type="button" class="pdp-thumb" data-imagen="./images/productos/14017393-2.jpg">
+                        <img src="./images/productos/14017393-2.jpg" alt="Colchón New style 6 — vista 2">
+                    </button>
+                    <button type="button" class="pdp-thumb" data-imagen="./images/productos/14017393-ft1.webp">
+                        <img src="./images/productos/14017393-ft1.webp" alt="Colchón New style 6 — detalle">
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -563,6 +637,11 @@
                 <input type="checkbox" id="pdpAlmohada">
                 + Almohada Fibra Light
             </label>
+
+            <div class="pdp-description">
+                <h2>Descripción</h2>
+                <p>El Colchón New style 6 de Línea Premium combina resortes pocket advance con espumas zonificadas para un soporte diferenciado por zonas del cuerpo. Firmeza intermedia y buena adaptabilidad, pensado para quienes buscan un descanso más tecnológico sin perder confort.</p>
+            </div>
 
             <div class="valores">
                 <div class="valores-row">
@@ -589,11 +668,6 @@
 
             <button type="button" class="product-cta" id="pdpAddToCart">Agregar al carro</button>
         </div>
-    </div>
-
-    <div class="pdp-description">
-        <h2>Descripción</h2>
-        <p>El Colchón New style 6 de Línea Premium combina resortes pocket advance con espumas zonificadas para un soporte diferenciado por zonas del cuerpo. Firmeza intermedia y buena adaptabilidad, pensado para quienes buscan un descanso más tecnológico sin perder confort.</p>
     </div>
 
 </div>
@@ -627,11 +701,20 @@ const menu = document.getElementById("headerMenu");
 header.addEventListener("mouseenter", () => menu.classList.add("show"));
 header.addEventListener("mouseleave", () => menu.classList.remove("show"));
 
+// Galería de miniaturas
+document.querySelectorAll('.pdp-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+        document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('selected'));
+        thumb.classList.add('selected');
+        document.getElementById('pdpImage').src = thumb.dataset.imagen;
+    });
+});
+
 // Datos reales del producto (mismos valores que en index-lineas.html)
 const PDP_DATA = {
     nombre: 'Colchón New style 6',
-    imagen: 'https://www.rosen.cl/media/catalog/product/1/4/14017392-1.jpg',
-    imagenAlmohada: 'https://www.rosen.cl/media/catalog/product/1/4/14012528-1new.jpg?quality=100&bg-color=255,255,255&fit=bounds&height=900&width=900&canvas=900:900',
+    imagen: './images/productos/14017392-1.jpg',
+    imagenAlmohada: './images/productos/14012528-1new.jpg',
     tamanos: {
         '150 x 190cm': { precio: 239990, precioNormal: 319990 },
         '150 x 200cm': { precio: 249990, precioNormal: 339990 }
