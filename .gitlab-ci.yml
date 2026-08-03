@@ -1,0 +1,13 @@
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - mkdir -p public
+    - cp index-guia.html index-lineas.html index-pdp.html README.md public/
+    - cp index-guia.html public/index.html
+    - cp -r images public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
